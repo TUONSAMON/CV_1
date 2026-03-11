@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuon Samon · Colorful CV</title>
+    <!-- Font Awesome 6 (free) for icons (still used for other icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #d4e0f0 0%, #b8cee8 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            color: #1e293b;
+            padding: 2rem 1rem;
+        }
+
+        .cv-card {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 30px 45px -15px rgba(0, 35, 70, 0.3);
+            overflow: hidden;
+            padding: 2rem 2rem 2.5rem 2rem;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        /* header with gradient */
+        .name-title {
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #0b3954, #1f5e8e);
+            padding: 1.5rem 2rem;
+            border-radius: 28px;
+            color: white;
+            box-shadow: 0 8px 14px rgba(6, 35, 60, 0.25);
+        }
+        .name-title h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            color: white;
+            text-shadow: 0 2px 3px rgba(0,0,0,0.2);
+        }
+        .name-title .subhead {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #e1f0fd;
+            margin-top: 0.3rem;
+            border-left: 5px solid #ffcd7e;
+            padding-left: 1rem;
+        }
+
+        /* 2‑column layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+
+        /* left panel — more colorful */
+        .left-panel {
+            background: linear-gradient(145deg, #e2f0f9, #cde3f2);
+            padding: 1.8rem 1.5rem;
+            border-radius: 28px;
+            box-shadow: inset 0 1px 4px rgba(255,255,255,0.8), 0 10px 15px -8px #2c577c;
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        /* profile image container — now with actual photo */
+        .profile-image {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        .profile-image .avatar {
+            width: 130px;
+            height: 130px;
+            background: linear-gradient(135deg, #f7c978, #faa75e); /* fallback, will be mostly covered by image */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 18px rgba(180, 100, 20, 0.3);
+            border: 4px solid #ffefc0;
+            overflow: hidden;  /* ensures image stays inside circle */
+        }
+        .profile-image .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* contact items with colorful icons */
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            color: #0a2e47;
+            word-break: break-word;
+            background: rgba(255,255,255,0.5);
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            backdrop-filter: blur(2px);
+        }
+        .contact-item .emoji {
+            font-size: 1.3rem;
+            min-width: 1.8rem;
+            color: #d45a2e;
+        }
+
+        /* section headings with color underline */
+        .section h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            color: #003153;
+            border-bottom: 3px solid #fea82f;
+            padding-bottom: 0.4rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .left-panel .section h2 {
+            color: #0a2e4b;
+            border-bottom-color: #e1692e;
+        }
+
+        /* skills and language list items with colorful bullets */
+        .skill-list, .lang-list {
+            list-style: none;
+            padding: 0;
+        }
+        .skill-list li, .lang-list li {
+            margin-bottom: 0.6rem;
+            padding-left: 0.2rem;
+            font-size: 0.96rem;
+            border-left: 4px solid #f68e5f;
+            padding-left: 0.9rem;
+            background: linear-gradient(90deg, rgba(255,240,225,0.5), transparent);
+            border-radius: 0 12px 12px 0;
+        }
+        .lang-list li {
+            border-left-color: #3090c0;
+            font-weight: 500;
+        }
+
+        /* right panel text with subtle background */
+        .about-text {
+            font-size: 0.98rem;
+            color: #1b3147;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+            background: #fefbf5;
+            padding: 1rem 1.4rem;
+            border-radius: 24px;
+            box-shadow: inset 0 1px 5px #ffe6c7;
+        }
+
+        /* education & experience date badges colorful */
+        .edu-date, .exp-date {
+            font-weight: 700;
+            background: linear-gradient(145deg, #fbc490, #faa459);
+            color: #1d3e63;
+            display: inline-block;
+            padding: 0.3rem 1.3rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+            margin-bottom: 0.6rem;
+            box-shadow: 0 4px 6px rgba(220, 120, 20, 0.2);
+            border: 1px solid #ffeac2;
+        }
+
+        .edu-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #003b66;
+        }
+        .edu-desc {
+            margin-top: 0.15rem;
+            color: #1f4970;
+            font-size: 0.95rem;
+            padding-left: 0.8rem;
+            border-left: 3px dotted #f7b267;
+        }
+
+        /* projects colorful list */
+        .project-list {
+            padding-left: 1.2rem;
+            margin-top: 0.3rem;
+            list-style-type: none;
+        }
+        .project-list li {
+            margin-bottom: 0.7rem;
+            font-size: 0.95rem;
+            color: #003153;
+            background: #fff2df;
+            padding: 0.4rem 1rem 0.4rem 2rem;
+            border-radius: 50px;
+            position: relative;
+            box-shadow: 0 2px 5px #f0d8b0;
+        }
+        .project-list li::before {
+            content: "▹";
+            color: #f08534;
+            font-weight: bold;
+            position: absolute;
+            left: 0.8rem;
+        }
+
+        /* experience list with colorful markers */
+        .exp-list {
+            padding-left: 1.5rem;
+            margin-top: 0.3rem;
+            list-style-type: none;
+        }
+        .exp-list li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            color: #1e3a5f;
+            background: rgba(255, 237, 215, 0.7);
+            padding: 0.3rem 1rem 0.3rem 2rem;
+            border-radius: 30px;
+            position: relative;
+        }
+        .exp-list li::before {
+            content: "●";
+            color: #e2692c;
+            font-weight: bold;
+            position: absolute;
+            left: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        /* experience item spacing */
+        .exp-item {
+            margin-bottom: 1.8rem;
+        }
+
+        /* right panel sections get light background */
+        .right-panel .section {
+            background: rgba(249, 248, 255, 0.7);
+            padding: 1.2rem 1.2rem;
+            border-radius: 26px;
+            box-shadow: 0 6px 12px rgba(90, 130, 180, 0.1);
+            backdrop-filter: blur(3px);
+        }
+
+        /* responsive */
+        @media (max-width: 700px) {
+            .two-col {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .name-title h1 {
+                font-size: 2.3rem;
+            }
+            .profile-image .avatar {
+                width: 110px;
+                height: 110px;
+            }
+        }
+
+        /* note at bottom with style */
+        .note-original {
+            font-size: 0.8rem;
+            color: #4c617b;
+            text-align: right;
+            margin-top: 1.8rem;
+            border-top: 2px dashed #f3b27a;
+            padding-top: 0.8rem;
+            background: #fcf6ed;
+            padding: 0.6rem 1rem;
+            border-radius: 40px;
+        }
+    </style>
+</head>
+<body>
+<div class="cv-card">
+    <!-- header: name + student with color gradient -->
+    <div class="name-title">
+        <h1>TUON SAMON</h1>
+        <div class="subhead">Student</div>
+    </div>
+
+    <!-- main two columns -->
+    <div class="two-col">
+        <!-- LEFT COLUMN: Profile image, Contact, Skills, Language (colorful) -->
+        <div class="left-panel">
+            <!-- Profile image: now using actual image (image.png) -->
+            <div class="profile-image">
+                <div class="avatar">
+                    <!-- <i> icon removed, image is active -->
+                    <img class="avatar-img" src="image.png" alt="Tuon Samon">
+                </div>
+            </div>
+
+            <!-- Contact -->
+            <div class="section">
+                <h2>Contact</h2>
+                <div class="contact-item">
+                    <span class="emoji">📞</span>
+                    <span>+096696842 (Telegram)</span>
+                </div>
+                <div class="contact-item">
+                    <span class="emoji">📧</span>
+                    <span>tuonsamon@168gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="emoji">📍</span>
+                    <span>#687G, Sang kart Tetla, Khan Sensok, Phnom Penh, camonbodia</span>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="section">
+                <h2>Skills</h2>
+                <ul class="skill-list">
+                    <li>Web Design</li>
+                    <li>Microsoft Office (point, Word, Excel)</li>
+                    <li>Graphic Design</li>
+                    <li>CUSTOMER SERVICE</li>
+                    <li>HTML5, CSS3, JavaScript, React.js</li>
+                    <li>Figma</li>
+                    <li>Git / GitHub</li>
+                    <li>Python</li>
+                    <li>SQL Server</li>
+                    <li>Spring Boot</li>
+                </ul>
+            </div>
+
+            <!-- Language -->
+            <div class="section">
+                <h2>Language</h2>
+                <ul class="lang-list">
+                    <li>English</li>
+                    <li>Khmer</li>
+                </ul>
+            </div>
+        </div>  <!-- end left panel -->
+
+        <!-- RIGHT COLUMN: About Me, Education, Projects, Experience (enhanced with color) -->
+        <div class="right-panel">
+            <!-- About Me -->
+            <div class="section">
+                <h2>About Me</h2>
+                <p class="about-text">
+                    I am currently pursuing a Bachelor's Degree in Computer Science at Western University. 
+                    I have studied courses such as English writing, social studies, and other subjects related to my major. 
+                    I graduated from high school in 2022 and I am passionate about learning software development and technology.
+                </p>
+            </div>
+
+            <!-- Education -->
+            <div class="section">
+                <h2>Education</h2>
+                <div class="edu-item">
+                    <div class="edu-date">2022 - 2023</div>
+                    <div class="edu-title">HIGH SCHOOL</div>
+                    <div class="edu-desc">Completed High School Diploma in Battambang Province.</div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-date">2023 - 2026</div>
+                    <div class="edu-title">WESTERN UNIVERSITY</div>
+                    <div class="edu-desc">Bachelor of Computer Science (Year 4)</div>
+                </div>
+            </div>
+
+            <!-- SCHOOL PROJECTS -->
+            <div class="section">
+                <h2>SCHOOL PROJECTS</h2>
+                <ul class="project-list">
+                    <li>POS System Management Café (React.js, Spring Boot, SQL Server, REST API)</li>
+                    <li>Face Recognition Attendance System (Python)</li>
+                    <li>Web Application (React.js)</li>
+                    <li>Mobile Dashboard Application (Flutter)</li>
+                </ul>
+            </div>
+
+            <!-- Experience -->
+            <div class="section">
+                <h2>Experience</h2>
+                <div class="exp-item">
+                    <div class="exp-date">2023 - 2024</div>
+                    <ul class="exp-list">
+                        <li>I have interned at ABA Microfinance Institution and worked in animation</li>
+                        <li>Internship at the University for 3 months web design</li>
+                    </ul>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-date">2024 - 2025</div>
+                    <ul class="exp-list">
+                        <li>Customer Service Assistant (5 months)</li>
+                        <li>Assisted customers with deposits and withdrawals</li>
+                        <li>Provided chat support and customer assistance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>  <!-- end right panel -->
+    </div>  <!-- end two-col -->
+
+    <!-- footnote with style -->
+  
+</body>
+</html>
